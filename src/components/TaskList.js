@@ -11,7 +11,7 @@ export function TaskList({taskList, setTaskList, isDone, setIsDone, idsList, set
 
         if(response.ok){
             const newIsDone = isDone.slice();
-            newIsDone[number]=true;
+            newIsDone[number]=!isDone[number];
             setIsDone(newIsDone);
         }
     
@@ -44,7 +44,7 @@ export function TaskList({taskList, setTaskList, isDone, setIsDone, idsList, set
         return (
             <li key={number} style={{textDecoration: isDone[number]? 'line-through': ''}}>
                 {task}
-                <Button type="button" text="Done" handleClick={() => handleDone(number)} />
+                <Button type="button" text={isDone[number]? "unDone": "Done"} handleClick={() => handleDone(number)} />
                 <Button type="button" text="Delete" handleClick={() => handleDelete(number)} />
             </li>
         )

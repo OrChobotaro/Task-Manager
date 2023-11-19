@@ -49,7 +49,9 @@ router.patch('/:id', async (req, res) => {
         return res.status(404).json({error: 'No such task'});
     }
 
-    const task = await Task.findOneAndUpdate({_id:id}, {isDone:1})
+    const tmp = await Task.findOne({_id:id})
+    console.log(tmp.isDone);
+    const task = await Task.findOneAndUpdate({_id:id}, {isDone:!tmp.isDone})
 
     if (!task) {
         return res.status(400).json({error: 'No such task'});
